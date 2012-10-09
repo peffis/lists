@@ -26,7 +26,7 @@ INSTALLING SOFTWARE
 as /var/www) or to a subfolder under the web root (such as
 /var/www/the_list)
 
-2) If you are want to keep others from pokeing/peeking at your list
+2) If you want to keep others from pokeing/peeking at your list
 you should password protect the folder (see your web server manual or
 your web hosting company's control panel) because the software itself
 does not care about authentication/authorization. 
