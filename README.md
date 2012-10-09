@@ -15,6 +15,10 @@ avoid needing to write notes on paper that are exclusive to one person
 in the house. The user interface is made small to be easy to use on even small
 mobile devices. 
 
+SCREEN SHOT
+-----------
+https://github.com/peffis/lists/blob/master/screenshot.png
+
 
 INSTALLING SOFTWARE
 -------------------
