@@ -17,7 +17,7 @@ mobile devices.
 
 SCREEN SHOT
 -----------
-![screenshot](https://github.com/peffis/lists/blob/master/screenshot.png "Screenshot")
+<img src="https://github.com/peffis/lists/blob/master/screenshot.png" title="screenshot" alt="screenshot"/>
 
 
 INSTALLING SOFTWARE
