@@ -49,13 +49,13 @@ the_list.* to 'list_user'@'%' identified by 'your password';" in mysql - whateve
 password you used in step 2
 
 4) Create a table in the list database you created in step 1 (use some
-admin tool or do "CREATE TABLE 'lists' ('lists' text NOT NULL);" in
-mysql) as the user you created in step 2. It is a simple table with
-one column of type text. The name of the column should be 'lists'. No
-other database schema is being used currently in this project. In
-fact, since the JSON object is written in text into this field it
-would be possible to replace the mysql dependency completely with a
-write to a file in the file system. 
+admin tool or do "CREATE TABLE 'lists' ('lists' text NOT NULL,
+'updated' datetime);" in mysql) as the user you created in step 2. It
+is a simple table with one column of type text. The name of the column
+should be 'lists'. No other database schema is being used currently in
+this project. In fact, since the JSON object is written in text into
+this field it would be possible to replace the mysql dependency
+completely with a write to a file in the file system. 
 
 
 Acknowledgements

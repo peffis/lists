@@ -1,7 +1,17 @@
 
 function save() {
+    listd.version += 1;
+
     $.post( 'save.php', 
-	    'data=' + encodeURIComponent(JSON.stringify(lists)));
+	    'data=' + encodeURIComponent(JSON.stringify(listd)),
+	    function() {})
+	.success(function() {})
+	.error(function() {
+		   listd.version = 0;
+		   alert("Version mismatch\nPlease reload page before\nnext update")
+	       })
+	.complete(function() {});
+    
 }
 
 function deleteList(listId) {
@@ -9,14 +19,15 @@ function deleteList(listId) {
   
     if (confirm("Do you really want to remove the list?")) {
 
-       for (i in lists) {
-	   if (lists[i].id != listId) {
-	       new_lists.push(lists[i]);
+       for (i in listd.lists) {
+	   if (listd.lists[i].id != listId) {
+	       new_lists.push(listd.lists[i]);
 	   }
        }
 
-       lists = new_lists;
-       generateListTables()    
+       listd.lists = new_lists;
+       generateListTables();
+       save();
     }
 }
 
@@ -25,14 +36,15 @@ function generateId() {
 }
 
 function addItem(listId, itemstr) {
-    for (i in lists) {
-	if (lists[i].id == listId) {
+    for (i in listd.lists) {
+	if (listd.lists[i].id == listId) {
 	    new_item = {};
 	    new_item.id = generateId();
 	    new_item.descr = itemstr;
-	    lists[i].items.push(new_item);
-	    generateListTables(lists[i].id);
+	    listd.lists[i].items.push(new_item);
+	    generateListTables(listd.lists[i].id);
 	    $('#_newList').focus();
+	    save();
 	}
     }
 
@@ -52,10 +64,11 @@ function deleteItemFromList(list, itemId) {
 
 
 function deleteItem(itemId) {
-    for (i in lists) {
-	deleteItemFromList(lists[i], itemId);
+    for (i in listd.lists) {
+	deleteItemFromList(listd.lists[i], itemId);
     }
     generateListTables();
+    save();
 }
 
 function generateListTable(list, listId) {
@@ -82,8 +95,8 @@ function generateListTable(list, listId) {
 function generateListTables(listId) {
     $('#lists').html('');
 
-    for (i in lists) {
-	$('#lists').append(generateListTable(lists[i], listId));
+    for (i in listd.lists) {
+	$('#lists').append(generateListTable(listd.lists[i], listId));
     }
 
     $(".list_delete").click(function(event){
@@ -123,8 +136,6 @@ function generateListTables(listId) {
 	}, function() {
 	    $(this).removeClass('pretty-hover');
 	});
-
-    save();
 }
 
 function addList() {
@@ -132,9 +143,10 @@ function addList() {
     new_list.name = $("#new_list").val();
     new_list.id = generateId();
     new_list.items = [];
-    lists.push(new_list);
+    listd.lists.push(new_list);
     $("#new_list").val("");
     generateListTables();
+    save();
 }
 
 

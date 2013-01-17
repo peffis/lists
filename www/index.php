@@ -11,7 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="text/javascript" src="json.js"></script> 
     <script type="text/javascript" 
-    	    src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
+    	    src="//ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js">
     </script>
     
     <script type="text/javascript">
@@ -21,14 +21,14 @@
                          or die("Could not connect to database");
                       mysql_select_db(MYSQL_DB) or die( "Could not select database" );  
                   
-                      $query = "SELECT * FROM lists";
+                      $query = "SELECT * FROM lists ORDER BY updated DESC limit 1";
                       $result = mysql_query($query);
                       $line = mysql_fetch_row($result);
 		      $json_string = $line[0];
 		      if ($json_string == 'undefined') {
-		          print("var lists = [];\n");
+		          print("var listd = { \"version\": 0, \"lists\": [] };\n");
 	              } else {
-                          print("var lists = JSON.parse('$json_string');\n");
+                          print("var listd = JSON.parse('$json_string');\n");
 		      }
 		    ?>
 	          /* ]]> */
